@@ -25,4 +25,3 @@ RUN mkdir -p input output
 
 # Command to run the application
 ENTRYPOINT ["python", "main.py"]
-ENTRYPOINT ["python", "main.py"]

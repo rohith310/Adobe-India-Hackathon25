@@ -5,6 +5,7 @@ This script extracts a clean outline of headings (H1, H2, H3) from PDF files usi
 ## Features
 
 - **Multi-factor heading detection**: Combines font size, formatting (bold/italic), positioning, and semantic patterns
+- **Modular architecture**: Separated into focused, reusable components
 - **Robust fallback modes**: Works even with uniform font sizes by analyzing text patterns and formatting
 - **Smart filtering**: Removes prose fragments, boilerplate text, and non-heading content
 - **Isolation detection**: Uses whitespace analysis to identify visually separated headings
@@ -27,7 +28,19 @@ This script extracts a clean outline of headings (H1, H2, H3) from PDF files usi
    python main.py
    ```
 
-## How It Works
+## Architecture
+
+### Modular Design
+
+The system is organized into focused modules for better maintainability:
+
+- **main.py**: Main orchestration and file processing
+- **pdf_heading_extractor.py**: Core extraction logic and coordination
+- **text_element.py**: Text extraction and element representation
+- **heading_patterns.py**: Pattern matching rules and text classification
+- **heading_scorer.py**: Scoring algorithms for heading detection
+- **document_analyzer.py**: Document structure analysis and context
+- **utils.py**: Common utilities and helper functions
 
 ### Multi-Factor Detection Algorithm
 
@@ -85,7 +98,7 @@ For each PDF `document.pdf`, generates `document.json`:
 
 The system automatically adapts to document characteristics, but key thresholds include:
 
-- **Minimum heading score**: 0.35 (adjustable for more/fewer headings)
+- **Minimum heading score**: 0.35 (adjustable in `heading_scorer.py`)
 - **Isolation threshold**: 1.2x line height for whitespace detection
 - **Text length**: 3-character minimum, 12-word maximum for headings
 
@@ -94,9 +107,9 @@ The system automatically adapts to document characteristics, but key thresholds 
 ### Common Issues
 
 - **"No headings detected"**: Check if PDF has extractable text and proper formatting
-- **Missing headings**: Lower the score threshold in `extract_headings()` method
-- **Too many false positives**: Increase threshold or enhance exclusion patterns
-- **Fragments detected**: Add new patterns to `exclusion_patterns` or `fragment_patterns`
+- **Missing headings**: Lower the score threshold in `heading_scorer.py`
+- **Too many false positives**: Increase threshold or enhance patterns in `heading_patterns.py`
+- **Import errors**: Ensure all module files are present in the same directory
 
 ### Debug Information
 
@@ -116,12 +129,18 @@ The script outputs detailed information during processing:
 ## File Structure
 ```
 1A/
-├── main.py              # Complete extraction script with all functionality
-├── input/              # Place PDF files here
-├── output/             # Generated JSON files (auto-created)
-├── requirements.txt    # Python dependencies
-├── Dockerfile          # Container setup
-└── README.md          # This file
+├── main.py                    # Main orchestration script
+├── pdf_heading_extractor.py   # Core extraction logic
+├── text_element.py           # Text extraction utilities
+├── heading_patterns.py       # Pattern matching rules
+├── heading_scorer.py         # Scoring algorithms
+├── document_analyzer.py      # Document analysis
+├── utils.py                  # Common utilities
+├── input/                    # Place PDF files here
+├── output/                   # Generated JSON files (auto-created)
+├── requirements.txt          # Python dependencies
+├── Dockerfile               # Container setup
+└── README.md               # This file
 ```
 
 ## Usage Examples
@@ -139,14 +158,22 @@ docker run --rm -v "$(pwd)/input:/app/input" -v "$(pwd)/output:/app/output" pdf-
 
 ## Advanced Customization
 
-To modify detection behavior, edit these sections in `main.py`:
+To modify detection behavior, edit these modules:
 
-- `heading_patterns`: Add new semantic patterns for your document types
-- `exclusion_patterns`: Add patterns to filter unwanted text
-- `calculate_heading_score()`: Adjust scoring weights
-- Classification thresholds in `classify_heading_level()`
+- **heading_patterns.py**: Add new semantic patterns for your document types
+- **heading_scorer.py**: Adjust scoring weights and thresholds
+- **document_analyzer.py**: Modify isolation detection and context analysis
+- **text_element.py**: Enhance text extraction for specific PDF formats
 
 ## Dependencies
 
 - **PyMuPDF (fitz)**: PDF text extraction and formatting analysis
-- **Python 3.7+**: Standard libraries (os, json, re, collections)
+- **Python 3.7+**: Standard libraries (os, json, re, collections, typing, dataclasses)
+
+## Benefits of Modular Architecture
+
+- **Maintainability**: Each module has a single, focused responsibility
+- **Reusability**: Components can be imported and used in other projects
+- **Testability**: Each module can be tested independently
+- **Extensibility**: New features can be added without modifying existing code
+- **Debugging**: Issues can be isolated to specific modules

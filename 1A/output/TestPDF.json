@@ -1,0 +1,80 @@
+{
+  "title": "TestPDF",
+  "outline": [
+    {
+      "level": "H1",
+      "text": "Welcome to the “Connecting the Dots” Challenge",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "Why This Matters",
+      "page": 1
+    },
+    {
+      "level": "H2",
+      "text": "Rethink Reading. Rediscover Knowledge",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "• Round 1:",
+      "page": 1
+    },
+    {
+      "level": "H3",
+      "text": "• Round 2:",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "Challenge Theme: Connecting the Dots Through Docs",
+      "page": 2
+    },
+    {
+      "level": "H1",
+      "text": "Your Mission",
+      "page": 2
+    },
+    {
+      "level": "H1",
+      "text": "What You Need to Build",
+      "page": 2
+    },
+    {
+      "level": "H1",
+      "text": "You Will Be Provided",
+      "page": 2
+    },
+    {
+      "level": "H2",
+      "text": "H3 — in a clean, hierarchical format.",
+      "page": 2
+    },
+    {
+      "level": "H2",
+      "text": "1. A sample input PDF (e.g., sample.pdf)",
+      "page": 2
+    },
+    {
+      "level": "H2",
+      "text": "2. A sample ground truth output (sample.json) for format clarity",
+      "page": 2
+    },
+    {
+      "level": "H3",
+      "text": "Round 1A: Understand Your Document",
+      "page": 2
+    },
+    {
+      "level": "H3",
+      "text": "• Extracts:",
+      "page": 2
+    },
+    {
+      "level": "H3",
+      "text": "• Outputs a valid JSON file in the format below:",
+      "page": 2
+    }
+  ]
+}

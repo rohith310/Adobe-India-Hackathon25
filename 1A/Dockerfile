@@ -17,11 +17,12 @@ COPY requirements.txt .
 RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application's code into the container at /app
-COPY . .
+# Copy all Python source files
+COPY *.py ./
 
 # Create input and output directories
 RUN mkdir -p input output
 
 # Command to run the application
+ENTRYPOINT ["python", "main.py"]
 ENTRYPOINT ["python", "main.py"]
